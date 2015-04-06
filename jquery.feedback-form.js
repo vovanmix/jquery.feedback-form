@@ -24,6 +24,7 @@
         var settings = $.extend({
             url: '/',
             type: 'post',
+            labels: {},
             validationRules: {'email': {email: true}},
             waitMessage: 'Please wait...',
             invalidMessage: 'Please fill in all data',
@@ -74,7 +75,7 @@
         };
 
         var removeErrors = function(){
-            formElement.find(':input').removeClass('has-error');
+            formElement.find(':input').removeClass('feedback-form-has-error');
             errorArea.html('');
         };
 
@@ -134,7 +135,7 @@
             for(var i in data){
                 if(data.hasOwnProperty(i)) {
                     var validateResult = validateItem(i, data[i]);
-                    if(!validateResult){
+                    if(!validateResult.valid){
                         errors[i] = validateResult.message;
                     }
                 }
@@ -165,13 +166,13 @@
 
                 if(settings.validationRules[i].min){
                     if(value.length < settings.validationRules[i].min){
-                        return {valid: false, message: renderTemplate(settings.validationMessages.min, {field: inputData.label, param: min})};
+                        return {valid: false, message: renderTemplate(settings.validationMessages.min, {field: inputData.label, param: settings.validationRules[i].min})};
                     }
                 }
 
                 if(settings.validationRules[i].max){
                     if(value.length > settings.validationRules[i].max){
-                        return {valid: false, message: renderTemplate(settings.validationMessages.max, {field: inputData.label, param: max})};
+                        return {valid: false, message: renderTemplate(settings.validationMessages.max, {field: inputData.label, param: settings.validationRules[i].max})};
                     }
                 }
 
@@ -179,6 +180,10 @@
                     if(!$.isNumeric(value)){
                         return {valid: false, message: renderTemplate(settings.validationMessages.number, {field: inputData.label})};
                     }
+                }
+
+                if(settings.validationRules[i].custom){
+                    return settings.validationRules[i].custom(value);
                 }
             }
 
@@ -190,8 +195,9 @@
             settings.onBeforeSend(data);
 
             $.ajax({
-                type: settings.type,
+                method: settings.type,
                 url: settings.url,
+                dataType: 'json',
                 data: data,
                 success: function (response) {
                     settings.onReady(response);
@@ -200,6 +206,9 @@
                         releaseButton(settings.sentMessage);
                     }
                     else{
+                        if(response.message){
+                            errorArea.html('<div class="feedback-form-error-message">'+response.message+'</div>');
+                        }
                         settings.onFail(response);
                         releaseButton(settings.errorMessage);
                     }
@@ -217,24 +226,38 @@
         var discoverFormInputs = function(){
             formElement.find(':input').each(function(){
                 var name = $(this).attr('name');
-                var id = $(this).attr('id');
-                var label = formElement.find('label[for="'+id+'"]').text();
-                label = label.trim();
-                if(!label && formElement.attr('placeholder')){
-                    label = formElement.attr('placeholder');
-                }
-                if(!label){
-                    label = name;
-                }
-                var required = $(this).attr('required') == true;
+                if(name) {
+                    var id = $(this).attr('id');
+                    var label = '';
+                    if(settings.labels[name]){
+                        label = settings.labels[name];
+                    }
+                    if (!label) {
+                        formElement.find('label[for="' + id + '"]').text();
+                        label = label.trim();
+                    }
+                    if (!label && $(this).data('label')) {
+                        label = $(this).data('label');
+                    }
+                    if (!label && $(this).attr('placeholder')) {
+                        label = $(this).attr('placeholder');
+                    }
+                    if (!label) {
+                        label = name;
+                    }
+                    var required = $(this).attr('required') == true;
+                    if(!required){
+                        required = $(this).data('required') == true;
+                    }
 
-                formInputs[name] = {
-                    id: id,
-                    name: name,
-                    required: required,
-                    label: label,
-                    element: $(this)
-                };
+                    formInputs[name] = {
+                        id: id,
+                        name: name,
+                        required: required,
+                        label: label,
+                        element: $(this)
+                    };
+                }
             });
         };
 

@@ -105,3 +105,11 @@
 .feedback-form-button-container.loading button[type="submit"] {
 	padding-right: 2.82142em;
 }
+
+.feedback-form-has-error{
+	background: #ffeeee !important;
+}
+.feedback-form-error-message{
+	color: #ff3333;
+	margin: 10px;
+}
