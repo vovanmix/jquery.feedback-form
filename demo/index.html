@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <title>jQuery feedback form  demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="../jquery.feedback-form.css"/>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+
+
+    </head>
+    <body>
+
+
+        <div class="well">
+            <!-- FORM -->
+            <form class="contact-form" id="contact" role="form">
+                <input type="hidden" id="product" value="Realtim"/>
+
+                <div class="col-md-6">
+                    <label for="name">Name</label>
+                    <input class="form-control input-box" id="name" type="text" name="name" required placeholder="Your name *">
+                </div>
+
+                <div class="col-md-6">
+                    <input class="form-control input-box" id="email" type="email" name="email" required placeholder="Your Email *">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="name">Phone</label>
+                    <input class="form-control input-box" id="phone" type="text" name="phone" placeholder="Your phone">
+                </div>
+
+                <div class="col-md-6">
+                    <input class="form-control input-box" id="skype" type="text" name="skype" placeholder="Your Skype">
+                </div>
+
+                <div class="col-md-12">
+                    <textarea class="form-control textarea-box" id="message" rows="8" required placeholder="Please shortly describe what do you want to order *"></textarea>
+                </div>
+
+                <div class="col-md-12">
+                    <small>Поля обозначенные знаками * обязательны для заполнения</small>
+                </div>
+
+                <button class="btn btn-primary standard-button2 ladda-button" type="submit" id="submit" name="submit" data-style="expand-left">Заказать</button>
+
+            </form>
+            <!-- /END FORM -->
+        </div>
+
+
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="../jquery.feedback-form.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#contact').feedbackForm();
+            });
+        </script>
+    </body>
+</html>

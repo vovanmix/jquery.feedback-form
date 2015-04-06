@@ -1,0 +1,21 @@
+{
+  "name": "vovanmix/jquery.feedback-form",
+  "type": "plugin",
+  "description": "jQuery plugin to create a feedback form fast",
+  "keywords": [
+    "feedback",
+    "ajax",
+    "json",
+    "input"
+  ],
+  "homepage": "http://github.com/vovanmix/jquery.feedback-form",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vladimir Mikhaylovskiy",
+      "email": "singingcode@gmail.com",
+      "homepage": "http://www.vprogrammer.com",
+      "role": "Developer"
+    }
+  ]
+}

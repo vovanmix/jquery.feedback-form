@@ -1,0 +1,26 @@
+{
+  "name": "vovanmix.jquery.feedback-form",
+  "version": "1.0.0",
+  "main": "jquery.feedback-form.js",
+  "keywords": [
+    "feedback",
+    "ajax",
+    "json",
+    "input"
+  ],
+  "authors": [
+    "Vladimir Mikhaylovskiy", "Vladimir Mikhaylovskiy <singingcode@gmail.com>"
+  ],
+  "ignore": [
+    ".idea"
+  ],
+  "licenses": "MIT",
+  "homepage": "http://github.com/vovanmix/jquery.feedback-form",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vovanmix/jquery.feedback-form.git"
+  },
+  "dependencies": {
+    "jquery": ">=1.7.2"
+  }
+}
