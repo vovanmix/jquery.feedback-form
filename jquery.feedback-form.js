@@ -110,12 +110,12 @@
 
         var blockButton = function(){
             submitButton.attr('disabled', 'disabled').text(settings.waitMessage);
-            icon.addClass("loading");
+            submitButtonContainer.addClass("loading");
         };
 
         var releaseButton = function(message){
             submitButton.removeAttr('disabled').text(message);
-            icon.removeClass("loading");
+            submitButtonContainer.removeClass("loading");
         };
 
         var collectData = function(){
@@ -248,10 +248,13 @@
             formElement.wrap('<div class="feedback-form-container"></div>');
             formElementContainer = formElement.parent();
             submitButton = formElement.find('input[type="submit"]');
+            if(submitButton.length == 0){
+                submitButton = formElement.find('button[type="submit"]');
+            }
             submitButton.wrap('<div class="feedback-form-button-container"></div>');
             submitButtonContainer = formElement.find('.feedback-form-button-container');
             submitButtonContainer.prepend('<i class="feedback-form-icon"></i>');
-            icon = formElement.find('.feedback-form-icon');
+            //icon = formElement.find('.feedback-form-icon');
             formElement.after('<div class="feedback-form-errors"></div>');
             errorArea = formElementContainer.find('.feedback-form-errors');
 
