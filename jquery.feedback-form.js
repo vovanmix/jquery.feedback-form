@@ -23,13 +23,13 @@
 
         var settings = $.extend({
             url: '/',
-            type: 'post',
+            method: 'post',
             labels: {},
             validationRules: {'email': {email: true}},
             waitMessage: 'Please wait...',
             invalidMessage: 'Please fill in all data',
             errorMessage: 'Error occurred',
-            sentMessage: 'Sent!',
+            sentMessage: 'Successfully sent!',
             validationMessages: {
                 required: "Field %field% is required",
                 email: "Field %field% must be a valid email",
@@ -49,7 +49,6 @@
         var formElement;
         var submitButtonContainer;
         var submitButton;
-        var icon;
         var errorArea;
         var formInputs = {};
 
@@ -112,6 +111,11 @@
         var blockButton = function(){
             submitButton.attr('disabled', 'disabled').text(settings.waitMessage);
             submitButtonContainer.addClass("loading");
+        };
+
+        var finalBlockButton = function(message){
+            submitButton.attr('disabled', 'disabled').text(message);
+            submitButtonContainer.removeClass("loading");
         };
 
         var releaseButton = function(message){
@@ -195,7 +199,7 @@
             settings.onBeforeSend(data);
 
             $.ajax({
-                method: settings.type,
+                method: settings.method,
                 url: settings.url,
                 dataType: 'json',
                 data: data,
@@ -203,7 +207,7 @@
                     settings.onReady(response);
                     if(response.success){
                         settings.onSuccess(response);
-                        releaseButton(settings.sentMessage);
+                        finalBlockButton(settings.sentMessage);
                     }
                     else{
                         if(response.message){
@@ -261,13 +265,7 @@
             });
         };
 
-        return this.each(function() {
-            if($(this).attr('feedbackForm') == 'true'){
-                return;
-            }
-            $(this).attr('feedbackForm', 'true');
-
-            formElement = $(this);
+        var addPluginMarkup = function(){
             formElement.wrap('<div class="feedback-form-container"></div>');
             formElementContainer = formElement.parent();
             submitButton = formElement.find('input[type="submit"]');
@@ -277,7 +275,6 @@
             submitButton.wrap('<div class="feedback-form-button-container"></div>');
             submitButtonContainer = formElement.find('.feedback-form-button-container');
             submitButtonContainer.prepend('<i class="feedback-form-icon"></i>');
-            //icon = formElement.find('.feedback-form-icon');
             formElement.after('<div class="feedback-form-errors"></div>');
             errorArea = formElementContainer.find('.feedback-form-errors');
 
@@ -285,8 +282,19 @@
                 settings.url = formElement.attr('action');
             }
             if(formElement.attr('method')){
-                settings.type = formElement.attr('method');
+                settings.method = formElement.attr('method');
             }
+        };
+
+        return this.each(function() {
+            if($(this).attr('feedbackForm') == 'true'){
+                return;
+            }
+            $(this).attr('feedbackForm', 'true');
+
+            formElement = $(this);
+
+            addPluginMarkup();
 
             discoverFormInputs();
 
