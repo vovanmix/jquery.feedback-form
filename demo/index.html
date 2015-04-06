@@ -14,6 +14,7 @@
 
 
         <div class="well">
+            <h3>This form will be sent successfully</h3>
             <!-- FORM -->
             <form class="contact-form" id="contact" role="form" action="/demo/success-response.json" method="post">
                 <input type="hidden" id="product" name="product" value="dfdsfds"/>
@@ -25,7 +26,7 @@
 
                 <div class="col-md-6">
                     <label for="name">Email</label>
-                    <input class="form-control input-box" id="email" type="email" name="email"  data-required="true" placeholder="Your Email *">
+                    <input class="form-control input-box" id="email" type="text" name="email"  data-required="true" placeholder="Your Email *">
                 </div>
 
                 <div class="col-md-6">
@@ -54,22 +55,47 @@
 
 
         <div class="well">
+            <h3>This form will have error from server</h3>
             <!-- FORM -->
             <form class="contact-form" id="contact2" role="form" action="/demo/error-response.json" method="post">
 
                 <div class="col-md-6">
                     <label for="name">Name</label>
-                    <input class="form-control input-box" id="name1" type="text" name="name" data-required="true" placeholder="Your name *">
+                    <input class="form-control input-box" id="name2" type="text" name="name" data-required="true" placeholder="Your name *">
                 </div>
 
                 <div class="col-md-6">
                     <label for="name">Email</label>
-                    <input class="form-control input-box" id="email1" type="email" name="email"  data-required="true" placeholder="Your Email *">
+                    <input class="form-control input-box" id="email2" type="text" name="email"  data-required="true" placeholder="Your Email *">
                 </div>
 
                 <div class="clear clearfix"></div>
 
-                <button type="submit" class="btn btn-primary standard-button2 ladda-button" id="submit1" name="submit" data-style="expand-left">Order</button>
+                <button type="submit" class="btn btn-primary standard-button2 ladda-button" id="submit2" name="submit" data-style="expand-left">Order</button>
+
+            </form>
+            <!-- /END FORM -->
+        </div>
+
+
+        <div class="well">
+            <h3>This form will receive 404</h3>
+            <!-- FORM -->
+            <form class="contact-form" id="contact3" role="form" action="/demo/none.json" method="post">
+
+                <div class="col-md-6">
+                    <label for="name">Name</label>
+                    <input class="form-control input-box" id="name3" type="text" name="name" data-required="true" placeholder="Your name *">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="name">Email</label>
+                    <input class="form-control input-box" id="email3" type="text" name="email"  data-required="true" placeholder="Your Email *">
+                </div>
+
+                <div class="clear clearfix"></div>
+
+                <button type="submit" class="btn btn-primary standard-button2 ladda-button" id="submit3" name="submit" data-style="expand-left">Order</button>
 
             </form>
             <!-- /END FORM -->
@@ -92,11 +118,10 @@
                 });
 
 
-                $('#contact2').feedbackForm({
-                    validationRules: {
-                        email: {email: true}
-                    }
-                });
+                $('#contact2').feedbackForm();
+
+
+                $('#contact3').feedbackForm();
             });
         </script>
     </body>

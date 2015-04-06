@@ -217,7 +217,7 @@
                         releaseButton(settings.errorMessage);
                     }
                 },
-                fail:  function (response) {
+                error:  function (response) {
                     settings.onError(response);
                     releaseButton(settings.errorMessage);
                 }
