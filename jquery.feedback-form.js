@@ -2,7 +2,7 @@
  * jquery.feedback-form.js
  * v 1.0.0 April 06 2015
  * ===========================================================
- * Copyright 2014 Vladimir Mikhaylovskiy.
+ * Copyright 2015 Vladimir Mikhaylovskiy.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
