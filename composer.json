@@ -1,5 +1,6 @@
 {
   "name": "vovanmix/jquery.feedback-form",
+  "version": "1.0.0",
   "type": "plugin",
   "description": "jQuery plugin to create a feedback form fast",
   "keywords": [
