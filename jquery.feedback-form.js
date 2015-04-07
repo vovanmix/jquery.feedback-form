@@ -109,17 +109,17 @@
         };
 
         var blockButton = function(){
-            submitButton.attr('disabled', 'disabled').text(settings.waitMessage);
+            submitButton.attr('disabled', 'disabled').text(settings.waitMessage).val(settings.waitMessage);
             submitButtonContainer.addClass("loading");
         };
 
         var finalBlockButton = function(message){
-            submitButton.attr('disabled', 'disabled').text(message);
+            submitButton.attr('disabled', 'disabled').text(message).val(message);
             submitButtonContainer.removeClass("loading");
         };
 
         var releaseButton = function(message){
-            submitButton.removeAttr('disabled').text(message);
+            submitButton.removeAttr('disabled').text(message).val(message);
             submitButtonContainer.removeClass("loading");
         };
 
