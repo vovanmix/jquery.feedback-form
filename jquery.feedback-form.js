@@ -272,6 +272,9 @@
             if(submitButton.length == 0){
                 submitButton = formElement.find('button[type="submit"]');
             }
+            if(submitButton.length == 0){
+                submitButton = formElement.find('a.submit-btn');
+            }
             submitButton.wrap('<div class="feedback-form-button-container"></div>');
             submitButtonContainer = formElement.find('.feedback-form-button-container');
             submitButtonContainer.prepend('<i class="feedback-form-icon"></i>');

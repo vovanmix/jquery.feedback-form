@@ -102,6 +102,7 @@
 	display: inline-block;
 }
 
+.feedback-form-button-container.loading a.submit-btn,
 .feedback-form-button-container.loading input[type="submit"],
 .feedback-form-button-container.loading button[type="submit"] {
 	padding-right: 2.82142em;
