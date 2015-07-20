@@ -22,6 +22,7 @@
     $.fn.feedbackForm = function(options) {
 
         var settings = $.extend({
+            useAjax: false,
             url: '/',
             method: 'post',
             labels: {},
@@ -90,7 +91,7 @@
         };
 
         var submit = function(e){
-            e.preventDefault();
+            //e.preventDefault();
 
             blockButton();
             removeErrors();
@@ -100,11 +101,18 @@
 
             if(validationResult.valid){
                 removeErrors();
-                sendRequest(data);
+                if(settings.useAjax) {
+                    sendRequest(data);
+                    e.preventDefault();
+                }
+                else{
+
+                }
             }
             else{
                 showErrors(validationResult.errors);
                 releaseButton(settings.invalidMessage);
+                e.preventDefault();
             }
         };
 
