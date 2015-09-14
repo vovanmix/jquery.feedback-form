@@ -95,7 +95,7 @@
             var response = {
                 continue: true
             };
-            formElement.trigger( "beforeSubmit.feedbackForm", e, response );
+            formElement.trigger( "beforeSubmit.feedbackForm", [e, response] );
 console.log(response);
             if(!response.continue){
                 return false;
