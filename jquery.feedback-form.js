@@ -91,6 +91,9 @@
         };
 
         var submit = function(e){
+
+            formElement.trigger( "beforeSubmit.feedbackForm", e );
+
             //e.preventDefault();
 
             blockButton();
