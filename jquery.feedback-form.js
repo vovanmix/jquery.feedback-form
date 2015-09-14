@@ -90,7 +90,18 @@
             }
         };
 
-        var finalSubmit = function(e){
+        var submit = function(e){
+
+            var response = {
+                continue: true
+            };
+            formElement.trigger( "beforeSubmit.feedbackForm", [response] );
+            if(!response.continue){
+                return false;
+            }
+
+            //e.preventDefault();
+
             blockButton();
             removeErrors();
 
@@ -112,21 +123,6 @@
                 releaseButton(settings.invalidMessage);
                 e.preventDefault();
             }
-        };
-
-        var submit = function(e){
-
-            var response = {
-                continue: true
-            };
-            formElement.trigger( "beforeSubmit.feedbackForm", [response] );
-            if(!response.continue){
-                return false;
-            }
-
-            //e.preventDefault();
-
-            finalSubmit();
         };
 
         var blockButton = function(){
@@ -323,8 +319,6 @@
             discoverFormInputs();
 
             formElement.bind('submit.feedbackForm', submit);
-
-            formElement.bind('finalSubmit.feedbackForm', submit);
 
         });
 
