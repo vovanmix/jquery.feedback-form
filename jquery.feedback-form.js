@@ -92,7 +92,14 @@
 
         var submit = function(e){
 
-            formElement.trigger( "beforeSubmit.feedbackForm", e );
+            var response = {
+                continue: true
+            };
+            formElement.trigger( "beforeSubmit.feedbackForm", e, response );
+console.log(response);
+            if(!response.continue){
+                return false;
+            }
 
             //e.preventDefault();
 
